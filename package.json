@@ -1,0 +1,21 @@
+{
+  "name": "simulationcontroller",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "tsc && node .",
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "run": "node ."
+  },
+  "author": "Nyk Stobbe",
+  "license": "ISC",
+  "dependencies": {
+    "@types/dotenv": "^8.2.0",
+    "@types/ws": "^8.5.3",
+    "dotenv": "^16.0.0",
+    "typescript": "^4.6.3",
+    "ws": "^8.5.0"
+  }
+}
