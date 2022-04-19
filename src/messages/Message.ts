@@ -1,12 +1,12 @@
-import { connectController } from "./connectController"
-import { EntityEnteredZone } from "./EntityEnteredZone"
-import { EntityExitedZone } from "./EntityExitedZone"
-import { SessionStart } from "./SessionStart"
-import { SessionStop } from "./SessionStop"
-import { SetAutomobileRouteStateMessage } from "./SetAutomobileRouteState"
+import { ConnectController } from "./connectController"
+import { EntityEnteredZone } from "./entityEnteredZone"
+import { EntityExitedZone } from "./entityExitedZone"
+import { SessionStart } from "./sessionStart"
+import { SessionStop } from "./sessionStop"
+import { SetAutomobileRouteStateMessage } from "./setAutomobileRouteState"
 
 export type Message = {
   eventType: string
 } & (
-    SessionStart | SetAutomobileRouteStateMessage | connectController | EntityEnteredZone | EntityExitedZone | SessionStop
+  SessionStart | SetAutomobileRouteStateMessage | ConnectController | EntityEnteredZone | EntityExitedZone | SessionStop
 )

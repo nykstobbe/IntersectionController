@@ -1,4 +1,4 @@
-export type connectController = {
+export type ConnectController = {
     eventType: "CONNECT_CONTROLLER",
     data: {
         sessionName: string,

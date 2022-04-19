@@ -1,16 +1,17 @@
 import WebSocket from "ws";
-import { connectController } from "../messages/connectController";
+import { ConnectController } from "../messages/connectController";
+import SessionData from "../state/sessionData";
 
-function onOpen(ws: WebSocket) {
-
+function onOpen(ws: WebSocket, sessionData: SessionData) {
     const sessionName: string = process.env.SESSION!;
-    console.log('starting on session: %s', sessionName)
+    console.log(`Starting on session: ${sessionName}`)
 
-    const message: connectController = {
+    const message: ConnectController = {
         eventType: "CONNECT_CONTROLLER",
         data: {
-            sessionName: "JustinEnNyk",
+            sessionName: sessionName,
             sessionVersion: 1,
+
             discardEventTypeErrors: false,
             discardInvalidStateErrors: false,
             discardMalformedDataErrors: false,
