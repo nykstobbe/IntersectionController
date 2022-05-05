@@ -1,5 +1,5 @@
 import WebSocket from "ws";
-import { Message } from "../messages/message";
+import { Message } from "../messages/Message";
 import clear from "../state/clear";
 import SessionData from "../state/sessionData";
 

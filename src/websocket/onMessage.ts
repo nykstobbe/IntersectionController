@@ -4,7 +4,7 @@ import EntityExitedZoneEvent from "../events/entityExitedZoneEvent";
 import SessionStartedEvent from "../events/sessionStartedEvent";
 import SessionStopEvent from "../events/sessionStopEvent";
 import SetAutomobileRouteStateEvent from "../events/setAutomobileRouteStateEvent";
-import { Message } from "../messages/message";
+import { Message } from "../messages/Message";
 import SessionData from "../state/sessionData";
 
 function onMessage(ws: WebSocket, sessionData: SessionData, data: RawData) {

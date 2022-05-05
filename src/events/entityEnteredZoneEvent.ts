@@ -1,5 +1,5 @@
 import WebSocket from "ws";
-import { EntityEnteredZone } from "../messages/entityEnteredZone";
+import { EntityEnteredZone } from "../messages/EntityEnteredZone";
 import SessionData from "../state/sessionData";
 
 function EntityEnteredZoneEvent(ws: WebSocket, sessionData: SessionData, msg: EntityEnteredZone) {
