@@ -35,6 +35,7 @@ function onMessage(ws: WebSocket, sessionData: SessionData, data: RawData) {
         }
         default: {
             console.log("unimplemented event type: %s", message.eventType)
+            console.log(JSON.stringify(message));
         }
     }
 };
