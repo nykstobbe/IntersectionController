@@ -2,6 +2,8 @@ import preferredRouteCombinations from "./getPreferedRouteCombinations";
 import SessionData from "./sessionData";
 import { setRouteState } from "./setRouteState";
 import WebSocket from "ws";
+import { SetBridgeWarningLightState } from "../messages/SetBridgeWarningLightState";
+import { RequestBridgeRoadEmpty } from "../messages/RequestBridgeRoadEmpty";
 
 let timeInSequence = 0;
 let handlingRoutes: number[] | undefined = undefined;
@@ -40,6 +42,28 @@ function tick(ws: WebSocket, sessionData: SessionData, tickRate: number) {
             });
         }
     }
+
+    if ((sessionData.getRouteCount(41) + sessionData.getRouteCount(42) > 0) && !sessionData.isHandlingBridge()) {
+        {
+            const message : SetBridgeWarningLightState = {
+                eventType: "SET_BRIDGE_WARNING_LIGHT_STATE",
+                data: {
+                    state: "ON"
+                }
+            }
+
+            ws.send(JSON.stringify(message));
+        }
+        {
+            const message : RequestBridgeRoadEmpty = {
+                eventType: "REQUEST_BRIDGE_ROAD_EMPTY"
+            }
+
+            ws.send(JSON.stringify(message));
+        }
+        sessionData.setHandlingBridge(true);
+    }
+
     timeInSequence += tickRate;
 }
 

@@ -1,4 +1,8 @@
 import WebSocket, { RawData } from "ws";
+import AcknowledgeBarriersStateEvent from "../events/acknowledgeBarriersStateEvent";
+import AcknowledgeBridgeRoadEmptyEvent from "../events/acknowledgeBridgeRoadEmptyEvent";
+import AcknowledgeBridgeStateEvent from "../events/acknowledgeBridgeStateEvent";
+import AcknowledgeBridgeWaterEmptyEvent from "../events/acknowledgeBridgeWaterEmptyEvent";
 import EntityEnteredZoneEvent from "../events/entityEnteredZoneEvent";
 import EntityExitedZoneEvent from "../events/entityExitedZoneEvent";
 import SessionStartedEvent from "../events/sessionStartedEvent";
@@ -22,6 +26,26 @@ function onMessage(ws: WebSocket, sessionData: SessionData, data: RawData) {
         }
         case "ENTITY_EXITED_ZONE": {
             EntityExitedZoneEvent(ws, sessionData, message);
+            break;
+        }
+        case "SESSION_STOP": {
+            SessionStopEvent(ws, sessionData, message);
+            break;
+        }
+        case "ACKNOWLEDGE_BRIDGE_ROAD_EMPTY": {
+            AcknowledgeBridgeRoadEmptyEvent(ws, sessionData, message);
+            break;
+        }
+        case "ACKNOWLEDGE_BARRIERS_STATE": {
+            AcknowledgeBarriersStateEvent(ws, sessionData, message);
+            break;
+        }
+        case "ACKNOWLEDGE_BRIDGE_STATE": {
+            AcknowledgeBridgeStateEvent(ws, sessionData, message);
+            break;
+        }
+        case "ACKNOWLEDGE_BRIDGE_WATER_EMPTY": {
+            AcknowledgeBridgeWaterEmptyEvent(ws, sessionData, message);
             break;
         }
         case "SESSION_STOP": {

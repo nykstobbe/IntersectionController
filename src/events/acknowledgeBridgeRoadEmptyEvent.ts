@@ -1,10 +1,20 @@
 import WebSocket from "ws";
 
 import { AcknowledgeBridgeRoadEmpty } from "../messages/AcknowledgeBridgeRoadEmpty";
+import { RequestBarriersState } from "../messages/RequestBarriersState";
 import SessionData from "../state/sessionData";
 
 function AcknowledgeBridgeRoadEmptyEvent(ws: WebSocket, sessionData: SessionData, msg: AcknowledgeBridgeRoadEmpty) {
-    console.log(msg.eventType, "event not yet implemented")
+    const message : RequestBarriersState = {
+        eventType: "REQUEST_BARRIERS_STATE",
+        data: {
+            state: "DOWN"
+        }
+    }
+
+    ws.send(JSON.stringify(message));
+
+    console.log("acknowledgeroadempty");
 }
 
-export default AcknowledgeBridgeRoadEmpty;
+export default AcknowledgeBridgeRoadEmptyEvent;

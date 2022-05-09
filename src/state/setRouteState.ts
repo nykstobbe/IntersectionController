@@ -2,7 +2,7 @@ import WebSocket from "ws";
 
 export function setRouteState(ws: WebSocket, routeId: number, state: "RED" | "GREEN" | "ORANGE" | "BLINKING") {
     let eventType: string = "";
-
+    
     if (routeId < 20) {
         eventType = "SET_AUTOMOBILE_ROUTE_STATE";
     } else if (routeId < 30) {
@@ -11,6 +11,8 @@ export function setRouteState(ws: WebSocket, routeId: number, state: "RED" | "GR
         eventType = "SET_PEDESTRIAN_ROUTE_STATE";
         if (state == "ORANGE")
             state = "BLINKING";
+    } else {
+        return;
     }
 
     const message = {
