@@ -3,7 +3,6 @@ import EntityEnteredZoneEvent from "../events/entityEnteredZoneEvent";
 import EntityExitedZoneEvent from "../events/entityExitedZoneEvent";
 import SessionStartedEvent from "../events/sessionStartedEvent";
 import SessionStopEvent from "../events/sessionStopEvent";
-import SetAutomobileRouteStateEvent from "../events/setAutomobileRouteStateEvent";
 import { Message } from "../messages/Message";
 import SessionData from "../state/sessionData";
 
@@ -15,10 +14,6 @@ function onMessage(ws: WebSocket, sessionData: SessionData, data: RawData) {
     switch (message.eventType) {
         case "SESSION_START": {
             SessionStartedEvent(ws, sessionData, message);
-            break;
-        }
-        case "SET_AUTOMOBILE_ROUTE_STATE": {
-            SetAutomobileRouteStateEvent(ws, message);
             break;
         }
         case "ENTITY_ENTERED_ZONE": {
