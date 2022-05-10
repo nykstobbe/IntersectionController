@@ -7,7 +7,7 @@ import { EntityEnteredZone } from "./EntityEnteredZone"
 import { EntityExitedZone } from "./EntityExitedZone"
 import { RequestBarriersState } from "./RequestBarriersState"
 import { RequestBridgeRoadEmpty } from "./RequestBridgeRoadEmpty"
-import { RequestBridgeStateMessage } from "./RequestBridgeState"
+import { RequestBridgeState } from "./RequestBridgeState"
 import { RequestBridgeWaterEmpty } from "./RequestBridgeWaterEmpty"
 import { SessionStart } from "./SessionStart"
 import { SessionStop } from "./SessionStop"
@@ -19,6 +19,6 @@ export type Message = {
   eventType: string
 } & (
   SessionStart | SetAutomobileRouteState | ConnectController | EntityEnteredZone | EntityExitedZone | SessionStop | 
-  SetBoatRouteState | SetBridgeWarningLightState | RequestBarriersState | RequestBridgeRoadEmpty | RequestBridgeStateMessage | 
+  SetBoatRouteState | SetBridgeWarningLightState | RequestBarriersState | RequestBridgeRoadEmpty | RequestBridgeState | 
   RequestBridgeWaterEmpty | AcknowledgeBarriersState | AcknowledgeBridgeRoadEmpty | AcknowledgeBridgeState | AcknowledgeBridgeWaterEmpty
 )
