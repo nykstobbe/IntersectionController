@@ -7,12 +7,14 @@ export default class SessionData {
     private bridgeQueue: Array<number>
     private running: boolean;
     private handlingBridge: boolean;
+    private routesWaitedSequences: Map<number, number>;
 
     public constructor() {
         this.running = false;
         this.entityInRouteCount = new Map();
         this.handlingBridge = false;
         this.bridgeQueue = new Array();
+        this.routesWaitedSequences = new Map();
     }
 
     public clear() {
@@ -20,6 +22,7 @@ export default class SessionData {
         this.entityInRouteCount = new Map();
         this.handlingBridge = false;
         this.bridgeQueue = new Array();
+        this.routesWaitedSequences = new Map();
     }
 
     public setRunning(running: boolean) {
@@ -33,6 +36,7 @@ export default class SessionData {
     public incrementRouteCount(routeId: number) {
         if (!this.entityInRouteCount.has(routeId)) {
             this.entityInRouteCount.set(routeId, 0);
+            this.routesWaitedSequences.set(routeId, 0);
         }
         
         const count = this.entityInRouteCount.get(routeId)!;
@@ -41,6 +45,20 @@ export default class SessionData {
         if(routeId > 40) {
             this.bridgeQueue.push(routeId);
         }
+    }
+
+    public getRoutesWaitedSequences(routeId: number) : number {
+        return this.routesWaitedSequences.get(routeId)!;
+    }
+
+    public setRoutesWaitedSequences(routeId: number, waitedSequences: number) {
+        this.routesWaitedSequences.set(routeId, waitedSequences);
+    }
+
+    public doSequence() {
+        this.routesWaitedSequences.forEach((routeId, waitedSequences) => {
+            this.setRoutesWaitedSequences(routeId, waitedSequences + 1);
+        })
     }
 
     public switchBridgeSide(firstRoute: number, ws: WebSocket) {

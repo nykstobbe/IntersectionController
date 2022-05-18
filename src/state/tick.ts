@@ -32,13 +32,16 @@ function tick(ws: WebSocket, sessionData: SessionData, tickRate: number) {
             }
         }
     } else {
-        handlingRoutes = preferredRouteCombinations(sessionData);;
+        handlingRoutes = preferredRouteCombinations(sessionData);
         
         if (handlingRoutes) {
+            sessionData.doSequence();
+
             routeState = "GREEN";
             
             handlingRoutes.forEach((routeId) => {
                 setRouteState(ws, routeId, "GREEN");
+                sessionData.setRoutesWaitedSequences(routeId, 0);
             });
         }
     }
