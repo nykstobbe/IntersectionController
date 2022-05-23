@@ -7,8 +7,6 @@ import { SetBridgeWarningLightState } from "../messages/SetBridgeWarningLightSta
 import SessionData from "../state/sessionData";
 
 function AcknowledgeBarriersStateEvent(ws: WebSocket, sessionData: SessionData, msg: AcknowledgeBarriersState) {
-    console.log("acknowledgeBarriersState");
-
     if (msg.data.state == "DOWN") {
 
         {

@@ -4,9 +4,7 @@ import { AcknowledgeBridgeRoadEmpty } from "../messages/AcknowledgeBridgeRoadEmp
 import { RequestBarriersState } from "../messages/RequestBarriersState";
 import SessionData from "../state/sessionData";
 
-function AcknowledgeBridgeRoadEmptyEvent(ws: WebSocket, sessionData: SessionData, msg: AcknowledgeBridgeRoadEmpty) {
-    console.log("acknowledgeroadempty");
-    
+function AcknowledgeBridgeRoadEmptyEvent(ws: WebSocket, sessionData: SessionData, msg: AcknowledgeBridgeRoadEmpty) {    
     const message : RequestBarriersState = {
         eventType: "REQUEST_BARRIERS_STATE",
         data: {

@@ -1,4 +1,4 @@
-import WebSocket from "ws";
+import WebSocket, { Data } from "ws";
 import { RequestBridgeWaterEmpty } from "../messages/RequestBridgeWaterEmpty";
 import { SetBoatRouteState } from "../messages/SetBoatRouteState";
 
@@ -8,6 +8,8 @@ export default class SessionData {
     private running: boolean;
     private handlingBridge: boolean;
     private routesWaitedSequences: Map<number, number>;
+    public lastBridgeTick = 0;
+    public tick = 0; 
 
     public constructor() {
         this.running = false;
@@ -62,7 +64,7 @@ export default class SessionData {
     }
 
     public switchBridgeSide(firstRoute: number, ws: WebSocket) {
-        console.log("switchbridgeside");
+        console.log("Switching bridge");
 
         {
             const message : SetBoatRouteState = {
@@ -90,7 +92,7 @@ export default class SessionData {
     }
 
     public closeBridge(routeId: number, ws: WebSocket) {
-        console.log("requestbridgewaterempty");
+        console.log("Closing bridge")
         {
             const message : SetBoatRouteState = {
                 eventType: "SET_BOAT_ROUTE_STATE",
@@ -106,12 +108,9 @@ export default class SessionData {
             const message : RequestBridgeWaterEmpty = {
                 eventType: "REQUEST_BRIDGE_WATER_EMPTY"
             }
-
+    
             ws.send(JSON.stringify(message));
         }
-        
-
-        
     } 
 
     public decrementRouteCount(routeId: number, ws: WebSocket) {
@@ -129,11 +128,11 @@ export default class SessionData {
                     break;
                 }
             }
-            if (!this.bridgeQueue.includes(routeId) && this.bridgeQueue.length > 0) {
-                this.switchBridgeSide(routeId, ws);
-            } else if (this.bridgeQueue.length == 0) {
-                this.closeBridge(routeId, ws);
-            }
+            // if (!this.bridgeQueue.includes(routeId) && this.bridgeQueue.length > 0) {
+            //     this.switchBridgeSide(routeId, ws);
+            // } else if (this.bridgeQueue.length == 0) {
+            //     this.closeBridge(routeId, ws);
+            // }
         }
     }
 
@@ -154,6 +153,7 @@ export default class SessionData {
     }
 
     public setHandlingBridge(handlingBridge: boolean) {
+        this.lastBridgeTick = this.tick;
         this.handlingBridge = handlingBridge;
     }
 

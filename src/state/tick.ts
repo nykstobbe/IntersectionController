@@ -10,6 +10,7 @@ let handlingRoutes: number[] | undefined = undefined;
 let routeState = "RED";
 
 function tick(ws: WebSocket, sessionData: SessionData, tickRate: number) {
+    sessionData.tick++;
     if (handlingRoutes) {
         if (routeState == "GREEN") {
             if (timeInSequence >= 8 * 1000) {
@@ -46,7 +47,7 @@ function tick(ws: WebSocket, sessionData: SessionData, tickRate: number) {
         }
     }
 
-    if ((sessionData.getRouteCount(41) + sessionData.getRouteCount(42) > 0) && !sessionData.isHandlingBridge()) {
+    if ((sessionData.getRouteCount(41) + sessionData.getRouteCount(42) > 0) && !sessionData.isHandlingBridge() && sessionData.tick - sessionData.lastBridgeTick > 250) {
         {
             const message : SetBridgeWarningLightState = {
                 eventType: "SET_BRIDGE_WARNING_LIGHT_STATE",
